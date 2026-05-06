@@ -35,6 +35,6 @@ jobs:
         docker run -p 8000:8000 -d test-backend:latest
     - name: Test Image
       run: |
-        sleep(3)
+        sleep 3
         curl http://localhost:8000/api/health
       
