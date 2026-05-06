@@ -37,4 +37,18 @@ jobs:
       run: |
         sleep 3
         curl http://localhost:8000/api/health
+  deploy:
+    runs-on: prod
+    steps:
+    - uses: actions/checkout@v4
+    - name: Docker build
+      run: |
+        docker build . -t prod-backend:latest
+    - name: Run Image
+      run: |
+        docker run -p 7777:8000 -d prod-backend:latest
+    - name: Test Image
+      run: |
+        sleep 3
+        curl http://localhost:7777/api/health
       
