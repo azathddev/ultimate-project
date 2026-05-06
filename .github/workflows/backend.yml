@@ -51,4 +51,3 @@ jobs:
       run: |
         sleep 3
         curl http://localhost:7777/api/health
-      
