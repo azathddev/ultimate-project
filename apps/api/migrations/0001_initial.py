@@ -8,25 +8,44 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Coin',
+            name="Coin",
             fields=[
-                ('id', models.CharField(default=uuid.uuid4, primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=128)),
-                ('description', models.TextField(blank=True, null=True)),
-                ('short_name', models.CharField(max_length=12)),
-                ('blockchain', models.CharField(choices=[('eth', 'Ethereum'), ('btc', 'Bitcoin'), ('sol', 'Solana'), ('ton', 'TonCoin')])),
+                (
+                    "id",
+                    models.CharField(
+                        default=uuid.uuid4, primary_key=True, serialize=False
+                    ),
+                ),
+                ("name", models.CharField(max_length=128)),
+                ("description", models.TextField(blank=True, null=True)),
+                ("short_name", models.CharField(max_length=12)),
+                (
+                    "blockchain",
+                    models.CharField(
+                        choices=[
+                            ("eth", "Ethereum"),
+                            ("btc", "Bitcoin"),
+                            ("sol", "Solana"),
+                            ("ton", "TonCoin"),
+                        ]
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Transaction',
+            name="Transaction",
             fields=[
-                ('id', models.CharField(default=uuid.uuid4, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.CharField(
+                        default=uuid.uuid4, primary_key=True, serialize=False
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
             ],
         ),
     ]

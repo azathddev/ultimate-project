@@ -6,5 +6,6 @@ def response(message: str, detail: str | dict | list, status: int) -> Response:
         {
             "message": message,
             "detail": detail,
-        }, status=status
+        },
+        status=status,
     )

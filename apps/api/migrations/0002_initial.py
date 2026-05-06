@@ -10,19 +10,27 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('api', '0001_initial'),
+        ("api", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='transaction',
-            name='receiver',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='transactions_receive', to=settings.AUTH_USER_MODEL),
+            model_name="transaction",
+            name="receiver",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="transactions_receive",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='transaction',
-            name='sender',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='transactions_send', to=settings.AUTH_USER_MODEL),
+            model_name="transaction",
+            name="sender",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="transactions_send",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

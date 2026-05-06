@@ -9,13 +9,11 @@ from apps.common.permissions import IsAuthed
 
 from rest_framework.response import Response
 
+
 class HealthCheck(APIView):
     def get(self, request):
-        return Response(
-            {
-                'detail': "ok"
-            }
-        )
+        return Response({"detail": "ok"})
+
 
 class TransactionAPIView(APIView):
     permission_classes = [IsAuthed]
@@ -33,13 +31,13 @@ class TransactionAPIView(APIView):
             return response(
                 "Validation Error",
                 {"detail": serializer.errors},
-                    status.HTTP_422_UNPROCESSABLE_ENTITY
+                status.HTTP_422_UNPROCESSABLE_ENTITY,
             )
         serializer.save()
         return response(
             "Transaction created successful",
             serializer.validated_data,
-            status.HTTP_201_CREATED
+            status.HTTP_201_CREATED,
         )
 
 
@@ -59,11 +57,11 @@ class CoinAPIView(APIView):
             return response(
                 "Validation Error",
                 {"detail": serializer.errors},
-                    status.HTTP_422_UNPROCESSABLE_ENTITY
+                status.HTTP_422_UNPROCESSABLE_ENTITY,
             )
         serializer.save()
         return response(
             "Coin created successful",
             serializer.validated_data,
-            status.HTTP_201_CREATED
+            status.HTTP_201_CREATED,
         )

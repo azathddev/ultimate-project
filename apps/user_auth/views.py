@@ -16,9 +16,7 @@ def register(request):
 
     if not serializer.is_valid():
         return response(
-            "Validation Error",
-            serializer.errors,
-            status.HTTP_422_UNPROCESSABLE_ENTITY
+            "Validation Error", serializer.errors, status.HTTP_422_UNPROCESSABLE_ENTITY
         )
 
     user = serializer.save()
@@ -26,11 +24,8 @@ def register(request):
     token, created = Token.objects.get_or_create(user=user)
     return response(
         "Successful register",
-        {
-            "username": user.username,
-            "token": token.key
-        },
-        status.HTTP_201_CREATED
+        {"username": user.username, "token": token.key},
+        status.HTTP_201_CREATED,
     )
 
 
@@ -40,31 +35,24 @@ def login(request):
 
     if not serializer.is_valid():
         return Response(
-            {
-                "message": "Validation Error",
-                "detail": serializer.errors
-            }, status=status.HTTP_422_UNPROCESSABLE_ENTITY
+            {"message": "Validation Error", "detail": serializer.errors},
+            status=status.HTTP_422_UNPROCESSABLE_ENTITY,
         )
 
     user = authenticate(**serializer.validated_data)
 
     if not user:
         return Response(
-            {
-                "message": "Authenticate Error",
-                "detail": "Invalid credentials"
-            }, status=status.HTTP_422_UNPROCESSABLE_ENTITY
+            {"message": "Authenticate Error", "detail": "Invalid credentials"},
+            status=status.HTTP_422_UNPROCESSABLE_ENTITY,
         )
 
     token, created = Token.objects.get_or_create(user=user)
 
     return response(
         "Successful log in",
-        {
-            "username": user.username,
-            "token": token.key
-        },
-        status.HTTP_200_OK
+        {"username": user.username, "token": token.key},
+        status.HTTP_200_OK,
     )
 
 
@@ -73,14 +61,9 @@ def me(request):
     if not hasattr(request.user, "username"):
         return response(
             "Authenticate Error",
-            {
-                "detail": "Credentials is not provided"
-            },
-            status=status.HTTP_401_UNAUTHORIZED
+            {"detail": "Credentials is not provided"},
+            status=status.HTTP_401_UNAUTHORIZED,
         )
-    return response("Successful log in",
-                    {
-                        "username": request.user.username
-                    },
-                    status.HTTP_200_OK
-                    )
+    return response(
+        "Successful log in", {"username": request.user.username}, status.HTTP_200_OK
+    )
