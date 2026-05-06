@@ -38,7 +38,7 @@ jobs:
         sleep 3
         curl http://localhost:8000/api/health
   deploy:
-    runs-on: prod
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v4
     - name: Docker build
